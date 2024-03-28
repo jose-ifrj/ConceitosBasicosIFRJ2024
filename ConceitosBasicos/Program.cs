@@ -119,7 +119,6 @@ static void OrdenarValores()
     int tamanho = 5;
     int[] valores = new int[tamanho];
     int[] ordenado = new int[tamanho];
-    int temp;
 
     for (int i = 0; i < valores.Length; i++)
     {
@@ -127,13 +126,13 @@ static void OrdenarValores()
         valores[i] = Convert.ToInt32(Console.ReadLine());
     }
 
-    for (int i = 4; i > valores.Length; i--)
+    for (int i = valores.Length; i > 1; i--)
     {
-        for (int j = i - 1; j < 4; j++)
+        for (int j = i - 1; j <= 4; j++)
         {
-            if (valores[j - 1] > valores[j])
+            if (valores[j - 1] < valores[j])
             {
-                temp = valores[j - 1];
+                var temp = valores[j - 1];
                 valores[j - 1] = valores[j];
                 valores[j] = temp;
             }
