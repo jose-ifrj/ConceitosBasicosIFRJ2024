@@ -2,6 +2,7 @@
 
 // modifique o programa para que possua um menu de opções para suas funcionalidades
 
+using System.ComponentModel.Design;
 using System.Globalization;
 
 int opcao = 0;
@@ -13,7 +14,13 @@ do
     Console.WriteLine("(2) Peso Ideal");
     Console.WriteLine("(3) Jogo de adivinhação");
     Console.WriteLine("(4) Ordenar Valores");
-    Console.WriteLine("(0) Encerrar");
+    Console.WriteLine("(5) Verificar Número Primo");
+    Console.WriteLine("(6) Número Fatorial");
+    Console.WriteLine("(7) Área do Retângulo");
+    Console.WriteLine("(8) Área do Triângulo");
+    Console.WriteLine("(9) Área da Circunferência");
+
+    Console.WriteLine("\n(0) Encerrar");
     opcao = Convert.ToInt32(Console.ReadLine());
     switch (opcao)
     {
@@ -29,15 +36,23 @@ do
         case 4:
             OrdenarValores();
             break;
+        case 5:
+            VerificarNumeroPrimo();
+            break;
+        case 6:
+            fatorial();
+            break;
+        case 7:
+            areaRetangulo();
+            break;
+        case 8:
+            areaTriangulo();
+            break;
+        case 9:
+            areaCircunferencia();
+            break;
     }
-    /*
-    if (opcao == 1)
-        CalcularIMC();
-    else if (opcao == 2)
-        PesoIdeal();
-    else if (opcao == 3)
-        JogoAdivinhacao();
-    */
+
 } while (opcao != 0);
 Console.WriteLine("Obrigado por sua participação!");
 Console.WriteLine("Programa Finalizado");
@@ -71,6 +86,13 @@ static void CalcularIMC()
     // crie a mensagem: O IMC x indica a classificação y
     // $ -> caractere de interpolação
     Console.WriteLine($"O IMC {imc} indica a classificação {status}");
+    Console.Write("Aperte Enter para continuar!");
+    ConsoleKeyInfo c;
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
 }
 
 static void PesoIdeal()
@@ -79,8 +101,15 @@ static void PesoIdeal()
     float altura = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
     float minIdeal = (float)(Math.Pow(altura, 2) * 18.5);
     float maxIdeal = (float)(Math.Pow(altura, 2) * 24.9);
-    Console.WriteLine($"Pelo IMC o peso ideal de uma pessoa com altura {altura}");
+    Console.WriteLine($"Pelo IMC, o peso ideal de uma pessoa que mede {altura*100}cm");
     Console.WriteLine($" fica entre {minIdeal:f1} e {maxIdeal:f1}");
+    Console.Write("Aperte Enter para continuar!");
+    ConsoleKeyInfo c;
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
 }
 
 static void JogoAdivinhacao()
@@ -112,6 +141,13 @@ static void JogoAdivinhacao()
 
     }
     Console.WriteLine("Fim de Jogo!");
+    Console.Write("Aperte Enter para continuar!");
+    ConsoleKeyInfo c;
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
 }
 
 static void OrdenarValores()
@@ -144,4 +180,153 @@ static void OrdenarValores()
     {
         Console.WriteLine(valor + " ");
     }
+
+    Console.Write("Aperte Enter para continuar!");
+    ConsoleKeyInfo c;
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
+}
+
+static void VerificarNumeroPrimo()
+{
+    Console.WriteLine("Informe um número inteiro:");
+    int numero = Convert.ToInt32(Console.ReadLine());
+    bool primo = true;
+    ConsoleKeyInfo c;
+    for (int i = 2; i < numero; i++)
+    {
+        if (numero % i == 0)
+        {
+            Console.WriteLine("O número informado não é primo!");
+            Console.Write("Aperte Enter para continuar!");
+            
+            do
+            {
+                c = Console.ReadKey();
+            } while (c.Key != ConsoleKey.Enter);
+            Console.Clear();
+            return;
+        }
+    }
+    Console.WriteLine("O número informado é primo!");
+    Console.Write("Aperte Enter para continuar!");
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
+    return;
+        
+    
+}
+
+static void areaRetangulo()
+{
+    Console.WriteLine("Insira a Altura do Retângulo em metros: ");
+    int altura = Int32.Parse(Console.ReadLine());
+    Console.WriteLine("\nInsira a Largura do Retângulo em metros: ");
+    int largura = Int32.Parse(Console.ReadLine());
+
+    Console.WriteLine("A área do retângulo é: {0}m²", altura*largura);
+    Console.Write("Aperte Enter para continuar!");
+    ConsoleKeyInfo c;
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
+}
+
+static void areaTriangulo()
+{
+    ConsoleKeyInfo c;
+    Console.WriteLine("Insira um lado do Triângulo em metros: ");
+    int lado1 = Int32.Parse(Console.ReadLine());
+    Console.WriteLine("\nInsira outro lado do Triângulo em metros: ");
+    int lado2 = Int32.Parse(Console.ReadLine());
+    Console.WriteLine("\nInsira o terceiro lado do Triângulo em metros: ");
+    int lado3 = Int32.Parse(Console.ReadLine());
+
+    bool lado1maior = lado1 > lado2 && lado1 > lado3;
+    bool lado2maior = lado2 > lado1 && lado2 > lado3;
+    bool lado3maior = lado3 > lado1 && lado3 > lado2;
+
+    bool triangulo = true;
+
+    if (lado1maior && lado2 + lado3 <= lado1)
+    {
+        // caso o lado 1 for maior, e a soma dos outros dois serem maiores:
+        triangulo = false;
+    };
+    if (lado2maior && lado1 + lado3 <= lado2)
+    {
+        // caso o lado 2 for maior, e a soma dos outros dois serem maiores:
+        triangulo = false;
+    };
+    if (lado3maior && lado1 + lado2 <= lado3)
+    {
+        // caso o lado 3 for maior, e a soma dos outros dois serem maiores:
+        triangulo = false;
+    };
+
+    if(triangulo == false)
+    {
+        Console.WriteLine("Algum lado é pequeno demais para formar um triângulo!");
+        Console.Write("Aperte Enter para continuar!");
+        do
+        {
+            c = Console.ReadKey();
+        } while (c.Key != ConsoleKey.Enter);
+        Console.Clear();
+        return;
+    }
+
+    double semiperimetro = (lado1 + lado2 + lado3)/2;
+
+    Console.WriteLine("A área do Triângulo é: {0}m²", Math.Sqrt((semiperimetro * (semiperimetro - lado1)*(semiperimetro - lado2)*(semiperimetro - lado3))));
+    Console.Write("Aperte Enter para continuar!");
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
+}
+
+static void areaCircunferencia()
+{
+    Console.WriteLine("Insira o Raio da Circunferência em metros: ");
+    int raio = Int32.Parse(Console.ReadLine());
+
+    Console.WriteLine("A área da Circunferência é: {0}m²", Math.PI * Math.Pow(raio, 2));
+    Console.Write("Aperte Enter para continuar!");
+    ConsoleKeyInfo c;
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
+}
+
+static void fatorial()
+{
+    Console.WriteLine("Insira um número");
+    int numero = Int32.Parse(Console.ReadLine());
+    int fatorial = 1;
+
+    for (int i = 1; i <= numero; i++)
+    {
+        fatorial *= i;
+    }
+
+    Console.WriteLine("O fatorial de {0} é {1}", numero, fatorial);
+    Console.Write("Aperte Enter para continuar!");
+    ConsoleKeyInfo c;
+    do
+    {
+        c = Console.ReadKey();
+    } while (c.Key != ConsoleKey.Enter);
+    Console.Clear();
 }
